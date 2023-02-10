@@ -60,8 +60,10 @@ function ManagerLogin() {
           </Button>
         </Card.Body>
         <br />
-        <h3>Don't have an account?</h3>
-        <Link to={`/ManagerSignup`}>Signup</Link>
+        <h6>Don't have an account?</h6>
+        <Link to={`/ManagerSignup`} className="btn btn-primary">
+          Signup
+        </Link>
       </Card>
     </div>
   );
