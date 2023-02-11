@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   TextField,
   Card,
@@ -6,23 +6,48 @@ import {
   CardActions,
   Button,
 } from "@mui/material";
+import axios from "axios";
+import { EmployeeContext } from "../../EmployeeContext";
 
 import "./style.css";
 
 function UserLogin() {
-  const [user, setUser] = useState({ Email: "", Password: "" });
+  const [user, setUser] = useState({ email: "", password: "" });
+  const { Euser, setEUser } = useContext(EmployeeContext);
 
-  function handleClick(event) {
-    console.log(user);
-  }
+  // function handleClick(event) {
+  //   console.log(user);
+  // }
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // console.log(user);
+
+    await axios
+      .post("http://localhost:8000/user/login", user)
+      .then((response) => {
+        console.log(response.data);
+        // console.log(response.data.token);
+        setEUser({
+          id: response.data["_id"],
+          name: response.data["name"],
+          email: response.data["email"],
+          mobile: response.data["mobile"],
+          designation: response.data["designation"],
+          team: response.data["team"],
+          manager: response.data["manager"],
+        });
+      });
+  };
+
+  console.log(Euser);
   function handleEmailChange(event) {
     const { value } = event.target;
 
     setUser((prevUser) => {
       return {
         ...prevUser,
-        Email: value,
+        email: value,
       };
     });
   }
@@ -33,7 +58,7 @@ function UserLogin() {
     setUser((prevUser) => {
       return {
         ...prevUser,
-        Password: value,
+        password: value,
       };
     });
   }
@@ -59,7 +84,7 @@ function UserLogin() {
           />
         </CardContent>
         <CardActions>
-          <Button variant="contained" onClick={handleClick}>
+          <Button variant="contained" onClick={handleSubmit}>
             Login
           </Button>
 

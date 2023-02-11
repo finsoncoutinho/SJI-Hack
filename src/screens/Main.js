@@ -8,7 +8,7 @@ function Main() {
       <Row>
         <Col>
           <img
-            src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+            src="https://b1984230.smushcdn.com/1984230/wp-content/uploads/2021/07/Access-Denied.png?lossy=1&strip=1&webp=1"
             class="img-fluid"
             alt="Phone image"
           />

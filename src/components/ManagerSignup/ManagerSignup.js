@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   TextField,
   Card,
@@ -6,35 +6,67 @@ import {
   CardActions,
   Button,
 } from "@mui/material";
+import axios from "axios";
 
 import "./style.css";
 import { Link } from "react-router-dom";
+import { UserContext } from "../../UserContext";
 
 function ManagerSignup() {
-  const [user, setUser] = useState({ Name: "", Email: "", Password: "" });
+  const { user, setUser } = useContext(UserContext);
+  const [AddUser, setAddUser] = useState({
+    name: "",
+    mobile: "",
+    email: "",
+    password: "",
+  });
 
-  function handleClick(event) {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     console.log(user);
-  }
+
+    await axios
+      .post("http://localhost:8000/manager", AddUser)
+      .then((response) => {
+        console.log(response.status);
+
+        setUser({
+          id: response.data["_id"],
+          name: response.data["name"],
+          email: response.data["email"],
+          mobile: response.data["mobile"],
+        });
+      });
+  };
 
   function handleNameChange(event) {
     const { value } = event.target;
 
-    setUser((prevUser) => {
+    setAddUser((prevUser) => {
       return {
         ...prevUser,
-        Name: value,
+        name: value,
       };
     });
   }
 
+  function handleMobileChange(event) {
+    const { value } = event.target;
+
+    setAddUser((prevUser) => {
+      return {
+        ...prevUser,
+        mobile: value,
+      };
+    });
+  }
   function handleEmailChange(event) {
     const { value } = event.target;
 
-    setUser((prevUser) => {
+    setAddUser((prevUser) => {
       return {
         ...prevUser,
-        Email: value,
+        email: value,
       };
     });
   }
@@ -42,10 +74,10 @@ function ManagerSignup() {
   function handlePasswordChange(event) {
     const { value } = event.target;
 
-    setUser((prevUser) => {
+    setAddUser((prevUser) => {
       return {
         ...prevUser,
-        Password: value,
+        password: value,
       };
     });
   }
@@ -57,8 +89,17 @@ function ManagerSignup() {
             id="standard-basic"
             label="Name"
             variant="standard"
-            value={user.Name}
+            value={AddUser.name}
             onChange={handleNameChange}
+          />
+          <br />
+          <br />
+          <TextField
+            id="outlined-password-input"
+            value={AddUser.mobile}
+            label="Contact No."
+            variant="standard"
+            onChange={handleMobileChange}
           />
           <br />
           <br />
@@ -66,27 +107,32 @@ function ManagerSignup() {
             id="standard-basic"
             label="Email"
             variant="standard"
-            value={user.email}
+            value={AddUser.email}
             onChange={handleEmailChange}
           />
           <br />
           <br />
           <TextField
             id="outlined-password-input"
-            value={user.password}
+            value={AddUser.password}
             label="Password"
             variant="standard"
             type="password"
             onChange={handlePasswordChange}
           />
         </CardContent>
+
         <CardActions>
-          <Button variant="contained" onClick={handleClick}>
+          <button class="btn btn-primary" onClick={handleSubmit}>
             SignUp
-          </Button>
-          <br />
+          </button>
+        </CardActions>
+        <br />
+        <CardActions>
           <h3> Have an account?</h3>
-          <Link to={`/ManagerLogin`}>Login</Link>
+          <Link class="btn btn-primary" to={`/`}>
+            Login
+          </Link>
         </CardActions>
       </Card>
     </div>
