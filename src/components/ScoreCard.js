@@ -65,7 +65,7 @@ function ScoreCard(props) {
       <Card.Body>
         <Card.Title>Communcation</Card.Title>{" "}
         <h2>
-          <Rater total={5} rating={props.rating1} interactive={false}></Rater>
+          <Rater total={5} rating={props.rating1} interactive={true}></Rater>
           <Button
             variant="contained"
             onClick={handleButtonClick1}
@@ -83,7 +83,7 @@ function ScoreCard(props) {
         )}
         <Card.Title>Attire</Card.Title>{" "}
         <h2>
-          <Rater total={5} rating={props.rating2} interactive={false}></Rater>
+          <Rater total={5} rating={props.rating2} interactive={true}></Rater>
           <Button
             variant="contained"
             onClick={handleButtonClick2}
@@ -101,7 +101,7 @@ function ScoreCard(props) {
         )}
         <Card.Title>Team work </Card.Title>{" "}
         <h2>
-          <Rater total={5} rating={props.rating3} interactive={false}></Rater>
+          <Rater total={5} rating={props.rating3} interactive={true}></Rater>
           <Button
             variant="contained"
             onClick={handleButtonClick3}
@@ -119,7 +119,7 @@ function ScoreCard(props) {
         )}
         <Card.Title>Punctuality </Card.Title>{" "}
         <h2>
-          <Rater total={5} rating={props.rating4} interactive={false}></Rater>
+          <Rater total={5} rating={props.rating4} interactive={true}></Rater>
           <Button
             variant="contained"
             onClick={handleButtonClick4}
@@ -137,7 +137,7 @@ function ScoreCard(props) {
         )}
         <Card.Title>Accountability</Card.Title>{" "}
         <h2>
-          <Rater total={5} rating={props.rating5} interactive={false}></Rater>
+          <Rater total={5} rating={props.rating5} interactive={true}></Rater>
           <Button
             variant="contained"
             onClick={handleButtonClick5}
